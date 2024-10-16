@@ -13,5 +13,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Get the PORT environment variable from Render (default to 8000)
 ENV PORT=${PORT:-8000}
 
-# Command to run the FastAPI application
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "$PORT"]
+# Use a shell to run the command so it can expand environment variables
+CMD exec uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}
+
